@@ -1,4 +1,7 @@
-/*
+(function (window, document) {
+  "use strict";
+
+  /*
 Vamos desenvolver mais um projeto. A ideia é fazer uma mini-calculadora.
 As regras são:
 
@@ -23,3 +26,82 @@ multiplicação (x), então no input deve aparecer "1+2x".
 input;
 - Ao pressionar o botão "CE", o input deve ficar zerado.
 */
+
+  var $input = document.querySelector("input");
+  var $zero = document.querySelector('[data-js="zero"]');
+  var $one = document.querySelector('[data-js="one"]');
+  var $two = document.querySelector('[data-js="two"]');
+  var $three = document.querySelector('[data-js="three"]');
+  var $four = document.querySelector('[data-js="four"]');
+  var $five = document.querySelector('[data-js="five"]');
+  var $six = document.querySelector('[data-js="six"]');
+  var $seven = document.querySelector('[data-js="seven"]');
+  var $eight = document.querySelector('[data-js="eight"]');
+  var $nine = document.querySelector('[data-js="nine"]');
+
+  var $equal = document.querySelector('[data-js="equal"]');
+  var $addition = document.querySelector('[data-js="addition"]');
+  var $minus = document.querySelector('[data-js="minus"]');
+  var $multiply = document.querySelector('[data-js="multiply"]');
+  var $division = document.querySelector('[data-js="division"]');
+
+  $one.addEventListener("click", function () {
+    $input.value += 1;
+  });
+
+  $two.addEventListener("click", function () {
+    $input.value += 2;
+  });
+  $three.addEventListener("click", function () {
+    $input.value += 3;
+  });
+  $four.addEventListener("click", function () {
+    $input.value += 4;
+  });
+  $five.addEventListener("click", function () {
+    $input.value += 5;
+  });
+  $six.addEventListener("click", function () {
+    $input.value += 6;
+  });
+  $seven.addEventListener("click", function () {
+    $input.value += 7;
+  });
+  $eight.addEventListener("click", function () {
+    $input.value += 8;
+  });
+  $nine.addEventListener("click", function () {
+    $input.value += 9;
+  });
+
+  $equal.addEventListener("click", function () {
+    operation($input.value);
+  });
+
+  $addition.addEventListener("click", function () {
+    $input.value += "+";
+  });
+  $minus.addEventListener("click", function () {
+    $input.value += "-";
+  });
+  $multiply.addEventListener("click", function () {
+    $input.value += "*";
+  });
+  $division.addEventListener("click", function () {
+    $input.value += "/";
+  });
+
+  var operator1 = {
+    "+": (num1, num2) => ($input.value = Number(num1) + Number(num2)),
+    "-": (num1, num2) => ($input.value = Number(num1) - Number(num2)),
+    "*": (num1, num2) => ($input.value = Number(num1) * Number(num2)),
+    "/": (num1, num2) => ($input.value = Number(num1) / Number(num2)),
+  };
+
+  function operation(operation) {
+    var numbers = operation.match(/\d+/g);
+    var operator2 = operation.match(/\D/g);
+
+    operator1[operator2].apply(operator1, numbers);
+  }
+})(window, document);
