@@ -27,81 +27,77 @@ input;
 - Ao pressionar o botão "CE", o input deve ficar zerado.
 */
 
-  var $input = document.querySelector("input");
-  var $zero = document.querySelector('[data-js="zero"]');
-  var $one = document.querySelector('[data-js="one"]');
-  var $two = document.querySelector('[data-js="two"]');
-  var $three = document.querySelector('[data-js="three"]');
-  var $four = document.querySelector('[data-js="four"]');
-  var $five = document.querySelector('[data-js="five"]');
-  var $six = document.querySelector('[data-js="six"]');
-  var $seven = document.querySelector('[data-js="seven"]');
-  var $eight = document.querySelector('[data-js="eight"]');
-  var $nine = document.querySelector('[data-js="nine"]');
+  var $visor = document.querySelector('[data-js="visor"]');
 
-  var $equal = document.querySelector('[data-js="equal"]');
-  var $addition = document.querySelector('[data-js="addition"]');
-  var $minus = document.querySelector('[data-js="minus"]');
-  var $multiply = document.querySelector('[data-js="multiply"]');
-  var $division = document.querySelector('[data-js="division"]');
+  var $buttonCE = document.querySelector('[data-js="CE"]');
 
-  $one.addEventListener("click", function () {
-    $input.value += 1;
+  var $buttonEqual = document.querySelector('[data-js="equal"]');
+
+  var $buttonNumbers = document.querySelectorAll('[data-js="numbers"]');
+
+  var $buttonOperators = document.querySelectorAll('[data-js="operators"]');
+
+  $buttonCE.addEventListener("click", handleClickCE, false);
+
+  $buttonEqual.addEventListener("click", handleClickEqual, false);
+
+  Array.prototype.forEach.call($buttonOperators, function (operator) {
+    operator.addEventListener("click", handleClickOperator, false);
   });
 
-  $two.addEventListener("click", function () {
-    $input.value += 2;
-  });
-  $three.addEventListener("click", function () {
-    $input.value += 3;
-  });
-  $four.addEventListener("click", function () {
-    $input.value += 4;
-  });
-  $five.addEventListener("click", function () {
-    $input.value += 5;
-  });
-  $six.addEventListener("click", function () {
-    $input.value += 6;
-  });
-  $seven.addEventListener("click", function () {
-    $input.value += 7;
-  });
-  $eight.addEventListener("click", function () {
-    $input.value += 8;
-  });
-  $nine.addEventListener("click", function () {
-    $input.value += 9;
+  Array.prototype.forEach.call($buttonNumbers, function (number) {
+    number.addEventListener("click", handleClickNumber, false);
   });
 
-  $equal.addEventListener("click", function () {
-    operation($input.value);
-  });
+  function handleClickCE() {
+    $visor.value = 0;
+  }
 
-  $addition.addEventListener("click", function () {
-    $input.value += "+";
-  });
-  $minus.addEventListener("click", function () {
-    $input.value += "-";
-  });
-  $multiply.addEventListener("click", function () {
-    $input.value += "*";
-  });
-  $division.addEventListener("click", function () {
-    $input.value += "/";
-  });
+  function handleClickEqual() {
+    $visor.value = removeLastItemIfItemIsAnOperator($visor.value);
+    var allValues = $visor.value.match(/(\d+)[+*/-]?/g);
 
-  var operator1 = {
-    "+": (num1, num2) => ($input.value = Number(num1) + Number(num2)),
-    "-": (num1, num2) => ($input.value = Number(num1) - Number(num2)),
-    "*": (num1, num2) => ($input.value = Number(num1) * Number(num2)),
-    "/": (num1, num2) => ($input.value = Number(num1) / Number(num2)),
-  };
+    $visor.value = allValues.reduce(function (prev, curr) {
+      var firstValue = prev.slice(0, -1);
+      var operator = prev.split("").pop();
+      var lastValue = removeLastItemIfItemIsAnOperator(curr);
+      var lastOperator = isLastItemAnOperator(curr) ? curr.split("").pop() : "";
 
-  function operation(operation) {
-    var numbers = operation.match(/\d+/g);
-    var operator2 = operation.match(/\D/g);
+      switch (operator) {
+        case "+":
+          return Number(firstValue) + Number(lastValue) + lastOperator;
+        case "-":
+          return Number(firstValue) - Number(lastValue) + lastOperator;
+        case "*":
+          return Number(firstValue) * Number(lastValue) + lastOperator;
+        case "/":
+          return Number(firstValue) / Number(lastValue) + lastOperator;
+      }
+    });
+  }
 
-    operator1[operator2].apply(operator1, numbers);
+  function handleClickNumber() {
+    $visor.value += this.value;
+  }
+
+  function handleClickOperator() {
+    $visor.value = removeLastItemIfItemIsAnOperator($visor.value);
+    $visor.value += this.value;
+  }
+
+  function removeLastItemIfItemIsAnOperator(number) {
+    if (isLastItemAnOperator(number)) return number.slice(0, -1);
+
+    return number;
+  }
+
+  function isLastItemAnOperator(number) {
+    var operators = ["+", "-", "*", "/"];
+
+    var lastItem = number.split("").pop();
+
+    return operators.some(function (operator) {
+      return operator === lastItem;
+    });
   }
 })(window, document);

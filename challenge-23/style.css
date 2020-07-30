@@ -1,0 +1,55 @@
+* {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.buttons {
+  margin-top: 5px;
+}
+
+button {
+  height: 40px;
+  width: 40px;
+  margin: 2px;
+  border: none;
+}
+
+.operator {
+  background-color: #484c69;
+  color: #221d35;
+}
+
+.operator:hover {
+  background-color: #221d35;
+  color: #484c69;
+  transition: opacity 0.5;
+  cursor: pointer;
+}
+
+.number {
+  background-color: #8a5782;
+  color: #45273e;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.number:hover {
+  background-color: #45273e;
+  color: #8a5782;
+  transition: opacity 0.5;
+  cursor: pointer;
+}
+
+.visor {
+  width: 182px;
+  height: 20px;
+  border: 1 solid #e7e9eb;
+  background-color: #dfcedc;
+}
+
+.addition {
+  float: right;
+  height: 216px;
+  margin-top: -42px;
+  margin-right: 1164px;
+}

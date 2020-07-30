@@ -3,31 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Document</title>
   </head>
   <body>
-    <input type="text" name="" id="" />
-    <div>
-      <button data-js="addition">+</button>
-      <button data-js="minus">-</button>
-      <button data-js="multiply">*</button>
-      <button data-js="division">/</button>
+    <input class="visor" data-js="visor" type="text" readonly value="0" />
+    <div class="buttons">
+      <div>
+        <button class="operator" data-js="operators" value="-">-</button>
+        <button class="operator" data-js="operators" value="*">*</button>
+        <button class="operator" data-js="operators" value="/">/</button>
+      </div>
+      <button class="operator addition" data-js="operators" value="+">+</button>
+      <div>
+        <button class="equal operator" data-js="equal">=</button>
+        <button class="CE operator" data-js="CE">CE</button>
+        <button class="number" data-js="numbers" value="0">0</button>
+        <button class="number" data-js="numbers" value="1">1</button>
+        <button class="number" data-js="numbers" value="2">2</button>
+        <button class="number" data-js="numbers" value="3">3</button>
+        <button class="number" data-js="numbers" value="4">4</button>
+        <button class="number" data-js="numbers" value="5">5</button>
+        <button class="number" data-js="numbers" value="6">6</button>
+        <button class="number" data-js="numbers" value="7">7</button>
+        <button class="number" data-js="numbers" value="8">8</button>
+        <button class="number" data-js="numbers" value="9">9</button>
+      </div>
     </div>
-    <div>
-      <button data-js="equal">=</button>
-      <button>CE</button>
-      <button data-js="zero">0</button><br />
-      <button data-js="one">1</button>
-      <button data-js="two">2</button>
-      <button data-js="three">3</button><br />
-      <button data-js="four">4</button>
-      <button data-js="five">5</button>
-      <button data-js="six">6</button><br />
-      <button data-js="seven">7</button>
-      <button data-js="eight">8</button>
-      <button data-js="nine">9</button>
-    </div>
-
     <script src="challenge-23.js"></script>
   </body>
 </html>
