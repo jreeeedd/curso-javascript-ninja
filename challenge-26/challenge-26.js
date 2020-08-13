@@ -24,22 +24,21 @@ Só passe para o próximo problema quando tiver resolvido o anterior :)
 
   function DOM(domNode) {
     this.element = document.querySelectorAll(domNode);
-
-    this.on = function on(event, callback) {
-      this.element.forEach(function (item) {
-        item.addEventListener(event, callback);
-      });
-    };
-
-    this.off = function off() {
-      this.element.removeEventListener();
-    };
-
-    this.get = function get() {
-      return this.element;
-    };
   }
 
+  DOM.prototype.on = function on(eventType, callback) {
+    this.element.forEach((item) => item.addEventListener(eventType, callback));
+  };
+
+  DOM.prototype.off = function off(eventType, callback) {
+    this.element.forEach((item) =>
+      item.removeEventListener(eventType, callback)
+    );
+  };
+
+  DOM.prototype.get = function get() {
+    return this.element;
+  };
   var $a = new DOM('[data-js="link"]');
   $a.on("click", function (e) {
     e.preventDefault();
