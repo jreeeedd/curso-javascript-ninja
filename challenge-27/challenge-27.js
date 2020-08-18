@@ -35,62 +35,28 @@ O método isNull deve retornar `true` se o valor for null ou undefined.
     );
   };
 
-  DOM.prototype.map = function map(callback) {
-    var newArray = [];
-
-    this.element.forEach(function (item) {
-      newArray.push(callback(item));
-    });
-
-    return newArray;
+  DOM.prototype.map = function map() {
+    return Array.prototype.map.apply(this.element, arguments);
   };
 
-  DOM.prototype.filter = function filter(callback) {
-    var newArray = [];
-
-    this.element.forEach(function (item) {
-      if (callback(item)) {
-        newArray.push(item);
-      }
-    });
-
-    return newArray;
+  DOM.prototype.filter = function filter() {
+    return Array.prototype.filter.apply(this.element, arguments);
   };
 
-  DOM.prototype.reduce = function reduce(callback, initialValue) {
-    var initialIndex = initialValue ? 0 : 1;
-
-    var accumulate = initialValue || this.element[0];
-
-    for (let i = initialIndex; i < this.element.length; i++) {
-      accumulate = callback(accumulate, this.element[0], this.element);
-    }
-
-    return accumulate;
+  DOM.prototype.reduce = function reduce() {
+    return Array.prototype.reduce.apply(this.element, arguments);
   };
 
-  DOM.prototype.reduceRight = function reduceRight() {};
-
-  DOM.prototype.some = function some(callback) {
-    var check = "";
-    for (let i = 0; i < this.element.length; i++) {
-      check = callback(this.element[i]);
-
-      if (check) {
-        return check;
-      }
-    }
-
-    return check;
+  DOM.prototype.reduceRight = function reduceRight() {
+    return Array.prototype.reduceRight.apply(this.element, arguments);
   };
 
-  DOM.prototype.every = function every(callback) {
-    var check = "";
-    for (let i = 0; i < this.element.length; i++) {
-      check = callback(this.element[i]);
-    }
+  DOM.prototype.some = function some() {
+    return Array.prototype.some.apply(this.element, arguments);
+  };
 
-    return check;
+  DOM.prototype.every = function every() {
+    return Array.prototype.every.apply(this.element, arguments);
   };
 
   DOM.prototype.isArray = function isArray(array) {
