@@ -30,13 +30,22 @@
         margin: 20px;
       }
 
-      input[type="submit"] {
+      input[type="submit"],
+      input[type="button"] {
         border-style: none;
         width: 90px;
         height: 40px;
         background-color: tomato;
         font-weight: bold;
       }
+
+      input[type="submit"]:hover,
+      input[type="button"]:hover {
+        color: tomato;
+        background-color: black;
+        cursor: pointer;
+      }
+
       input[type="submit"]:focus {
         background-color: black;
         color: tomato;
@@ -49,7 +58,7 @@
         background-color: #68768a;
       }
       th {
-        background-color: #fe5f55;
+        background-color: tomato;
         color: #eef5db;
       }
 

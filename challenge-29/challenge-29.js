@@ -109,6 +109,7 @@
         var $thAno = document.createElement("th");
         var $thPlaca = document.createElement("th");
         var $thCor = document.createElement("th");
+        var $thAcao = document.createElement("th");
 
         $thFoto.innerHTML = "Foto";
         $thMarca.innerHTML = "Marca";
@@ -116,6 +117,7 @@
         $thAno.innerHTML = "Ano";
         $thPlaca.innerHTML = "Placa";
         $thCor.innerHTML = "Cor";
+        $thAcao.innerHTML = "Ação";
 
         $tr.appendChild($thFoto);
         $tr.appendChild($thMarca);
@@ -123,6 +125,7 @@
         $tr.appendChild($thAno);
         $tr.appendChild($thPlaca);
         $tr.appendChild($thCor);
+        $tr.appendChild($thAcao);
 
         $thead.appendChild($tr);
 
@@ -144,6 +147,9 @@
         var $tdAno = document.createElement("td");
         var $tdPlaca = document.createElement("td");
         var $tdCor = document.createElement("td");
+        var $remover = document.createElement("input");
+
+        $remover.setAttribute("type", "button");
 
         $tdPhoto.textContent = $photo.get()[0].value;
         $tdMarca.textContent = $marca.get()[0].value;
@@ -151,6 +157,9 @@
         $tdAno.textContent = $ano.get()[0].value;
         $tdPlaca.textContent = $placa.get()[0].value;
         $tdCor.textContent = $cor.get()[0].value;
+        $remover.value = "Remover";
+
+        app.removeItem($remover, $tr);
 
         $tr.appendChild($tdPhoto);
         $tr.appendChild($tdMarca);
@@ -158,10 +167,20 @@
         $tr.appendChild($tdAno);
         $tr.appendChild($tdPlaca);
         $tr.appendChild($tdCor);
+        $tr.appendChild($remover);
 
         $tbody.appendChild($tr);
 
         return $tbody;
+      },
+
+      removeItem: function (button, item) {
+        button.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          var tbody = document.querySelector("tbody");
+          tbody.removeChild(item);
+        });
       },
 
       companyInfo: function () {
